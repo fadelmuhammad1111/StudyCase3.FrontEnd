@@ -297,7 +297,7 @@ const Courses = () => {
           <Form.Item name="department" label="Departemen" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="roomNumber" label="Nomor Ruangan" rules={[{ required: true }]}>
+          <Form.Item name="roomNumber" label="Ruangan" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
         </Form>
@@ -330,7 +330,7 @@ const Courses = () => {
           <Form.Item name="department" label="Departemen" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="roomNumber" label="Nomor Ruangan" rules={[{ required: true }]}>
+          <Form.Item name="roomNumber" label="Ruangan" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
         </Form>
