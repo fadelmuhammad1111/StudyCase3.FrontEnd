@@ -74,7 +74,7 @@ const DeletePage = () => {
           className="mt-4"
           onClick={() => router.push("/course")}
         >
-          Kembali ke Halaman Utama
+          Kembali ke Halaman Jadwal
         </Button>
       </div>
     </div>
