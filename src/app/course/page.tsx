@@ -26,7 +26,7 @@ const Courses = () => {
   const [editingCourse, setEditingCourse] = useState<Course | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchCourses = async () => {
@@ -38,6 +38,8 @@ const Courses = () => {
     } catch (error) {
       message.error("Gagal mengambil data");
       console.error(error);
+    } finally {
+      setTimeout(() => setLoading(false), 500); // Loading hanya muncul sebentar
     }
   };
 
