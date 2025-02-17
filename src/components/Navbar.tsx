@@ -23,7 +23,7 @@ const Navbar = () => {
             href="/course"
             className="hover:bg-white hover:text-blue-600 px-4 py-2 rounded-lg transition duration-300"
           >
-            Tambah Jadwal
+            Jadwal
           </Link>
           <Link
             href="/"
