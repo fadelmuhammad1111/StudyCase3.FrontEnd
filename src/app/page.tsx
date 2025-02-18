@@ -17,7 +17,7 @@ export default function LoginPage() {
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);
-    }, 2000); // Splash screen muncul selama 2 detik
+    }, 1500); // Splash screen muncul selama 2 detik
   }, []);
 
   const onFinish = async (values: { email: string; password: string }) => {

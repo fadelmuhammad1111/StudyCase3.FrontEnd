@@ -1,5 +1,6 @@
 "use client";
 
+import "@ant-design/v5-patch-for-react-19";
 import { Card, Statistic, Table, Tag, Skeleton } from "antd";
 import { UserOutlined, BookOutlined, HomeOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";

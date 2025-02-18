@@ -1,7 +1,9 @@
 "use client";
 
+import "@ant-design/v5-patch-for-react-19";
 import { useState, useEffect } from "react";
-import { Table, Button, message } from "antd";
+import { Table, Button, message, Dropdown, Modal } from "antd"; // Impor Modal
+import { EllipsisOutlined, RedoOutlined, DeleteOutlined } from "@ant-design/icons"; // Impor ikon
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -36,6 +38,28 @@ const DeletePage = () => {
     }
   };
 
+  const handlePermanentDelete = (id: number) => {
+    // Tampilkan modal konfirmasi sebelum menghapus
+    Modal.confirm({
+      title: "Apakah Anda yakin?",
+      content: "Anda akan menghapus kursus ini secara permanen. Kursus ini tidak dapat dikembalikan.",
+      onOk: async () => {
+        try {
+          await axios.delete(`http://localhost:3000/courses/${id}/permanent-delete`);
+          message.success("Course berhasil dihapus permanen");
+
+          // Hapus dari state agar UI langsung update
+          setDeletedCourses((prev) => prev.filter((course: any) => course.id !== id));
+        } catch (error) {
+          message.error("Gagal menghapus course secara permanen");
+        }
+      },
+      onCancel: () => {
+        message.info("Penghapusan dibatalkan");
+      },
+    });
+  };
+
   useEffect(() => {
     fetchDeletedCourses();
   }, []);
@@ -59,10 +83,37 @@ const DeletePage = () => {
             {
               title: "Aksi",
               key: "actions",
-              render: (_, record: any) => (
-                <Button onClick={() => handleRestore(record.id)} type="primary">
-                  Restore
-                </Button>
+              render: (_, record: { id: number }) => (
+                <Dropdown
+                  menu={{
+                    items: [
+                      {
+                        key: "restore",
+                        label: (
+                          <span>
+                            <RedoOutlined style={{ marginRight: 8 }} />
+                            Restore
+                          </span>
+                        ),
+                        onClick: () => handleRestore(record.id),
+                      },
+                      {
+                        key: "delete",
+                        label: (
+                          <span>
+                            <DeleteOutlined style={{ marginRight: 8 }} />
+                            Delete Permanently
+                          </span>
+                        ),
+                        onClick: () => handlePermanentDelete(record.id),
+                        danger: true,
+                      },
+                    ],
+                  }}
+                  trigger={["click"]}
+                >
+                  <Button icon={<EllipsisOutlined />} />
+                </Dropdown>
               ),
             },
           ]}
